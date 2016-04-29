@@ -1,11 +1,17 @@
-FROM ubuntu:14.04
+FROM debian:latest
 
 # Enable production settings by default; for development, this can be set to 
 # `false` in `docker run --env`
-ENV DJANGO_PRODUCTION=true
+ENV DJANGO_PRODUCTION=false
 
 # Set terminal to be noninteractive
 ENV DEBIAN_FRONTEND noninteractive
+
+# DT
+ENV HTTP_PROXY=http://proxy.mmfg.it:8080
+ENV HTTPS_PROXY=$HTTP_PROXY
+ENV http_proxy=$HTTP_PROXY
+ENV https_proxy=$HTTP_PROXY
 
 # Enable MySQL root user creation without interactive input
 RUN echo 'mysql-server mysql-server/root_password password devrootpass' | debconf-set-selections
